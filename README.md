@@ -16,6 +16,7 @@ Satellite images deep learning for oil palm semantic segmentation
   * River was obtained from Global River Width from Landsat (GRWL) dataset tile NA47, NA48, SA47, SA48. ([GEE](https://gee-community-catalog.org/projects/grwl/) [Zenodo](https://zenodo.org/record/1297434#.ZBCTKx_MK9I))
 
 ### Models and inputs
+All models were developed and tested for binary (oil palm vs non-oil palm) and multi-class segmentation tasks
 * U-Net with Sentinel-1 (VV, VH)
 * U-Net with Sentinel-2 (R, G, B, NIR)
 * U-Net with Sentinel-1 & Sentinel-2 Early Fusion 1 (All bands above)
