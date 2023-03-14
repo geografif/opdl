@@ -11,9 +11,9 @@ Satellite images deep learning for oil palm semantic segmentation
   * Oil palm plantations
   * Natural forests and plantation forests
   * Other land covers
-    * ESRI Land cover
+    * ESRI Land cover (L
     * ESA WorldCover
 * Other
   * Administrative boundary
   * River
-    River data was obtained from Global River Width from Landsat (GRWL) dataset. (Link 1)[https://gee-community-catalog.org/projects/grwl/] (Link 2)[https://zenodo.org/record/1297434#.ZBCTKx_MK9I]
+    River data was obtained from Global River Width from Landsat (GRWL) dataset. [Link 1](https://gee-community-catalog.org/projects/grwl/) [Link 2](https://zenodo.org/record/1297434#.ZBCTKx_MK9I)
