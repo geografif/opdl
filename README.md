@@ -15,6 +15,15 @@ Satellite images deep learning for oil palm semantic segmentation
   * Administrative boundary
   * River was obtained from Global River Width from Landsat (GRWL) dataset tile NA47, NA48, SA47, SA48. ([GEE](https://gee-community-catalog.org/projects/grwl/) [Zenodo](https://zenodo.org/record/1297434#.ZBCTKx_MK9I))
 
+### Models and inputs
+* U-Net with Sentinel-1 (VV, VH)
+* U-Net with Sentinel-2 (R, G, B, NIR)
+* U-Net with Sentinel-1 & Sentinel-2 Early Fusion 1 (All bands above)
+* U-Net with Sentinel-1 & Sentinel-2 Early Fusion 2 (S1-VV, S1-VH, S2-R)
+* U-Net with Sentinel-1 & Sentinel-2 Late Fusion (All bands)
+* CV-UNet with Sentinel-1 Polarimetric Covariance Matrix (C11-real, C12-complex, C22-real) (Imaginary part of real components was set as 0)
+* U-Net with Sentinel-1 Polarimetric Covariance Matrix & Sentinel-2 Late Fusion (All bands)
+
 ### Reference
 Allen & Pavelsky 2018
 Descals et al. 2020
