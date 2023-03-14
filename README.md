@@ -12,7 +12,7 @@ Satellite images deep learning for oil palm semantic segmentation
   * Natural forests and plantation forests were obtained from [Nusantara Atlas](https://map.nusantara-atlas.org/)
   * Water bodies and built-up areas were derived from ESRI Land Cover ([Living Atlas](https://livingatlas.arcgis.com/landcoverexplore), [GEE](https://gee-community-catalog.org/projects/S2TSLULC/))
 * Other
-  * Administrative boundary
+  * Administrative boundary ([Link](http://geoportal.riau.go.id/))
   * River was obtained from Global River Width from Landsat (GRWL) dataset tile NA47, NA48, SA47, SA48. ([GEE](https://gee-community-catalog.org/projects/grwl/), [Zenodo](https://zenodo.org/record/1297434#.ZBCTKx_MK9I))
 
 ### Models and inputs
