@@ -25,7 +25,7 @@ All models were developed and tested for binary (oil palm vs non-oil palm) and m
 * CV-UNet with Sentinel-1 Polarimetric Covariance Matrix (C11-real, C12-complex, C22-real) (Imaginary part of real components was set as 0)
 * U-Net with Sentinel-1 Polarimetric Covariance Matrix & Sentinel-2 Late Fusion (All bands)
 
-### Reference
+### References
 Allen & Pavelsky 2018
 Descals et al. 2020
 Gaveau et al. 2021
