@@ -15,4 +15,4 @@ Satellite images deep learning for oil palm semantic segmentation
     * ESA WorldCover
 * Other
   * Administrative boundary
-  * River was obtained from Global River Width from Landsat (GRWL) dataset. [Link 1](https://gee-community-catalog.org/projects/grwl/) [Link 2](https://zenodo.org/record/1297434#.ZBCTKx_MK9I)
+  * River was obtained from Global River Width from Landsat (GRWL) dataset. ([Link 1](https://gee-community-catalog.org/projects/grwl/) [Link 2](https://zenodo.org/record/1297434#.ZBCTKx_MK9I))
