@@ -16,7 +16,7 @@ This is a repository for oil palm semantic segmentation from Sentinel-1 SAR and/
 ##### Split to train/val/test
 #### Deep learning model training
 ##### Single input
-![](figures/single_unet.png "unet")
+
 ##### Stack input
 ##### Dual input (with spatial attention)
 #### Inference
@@ -25,8 +25,9 @@ This is a repository for oil palm semantic segmentation from Sentinel-1 SAR and/
 #### Model performances
 #### Map accuracy
 #### Interactive map for year 2021
-An interactive view of the oil palm map along rivers produced from this study can be accessed at 
-Deprecated: [https://bit.ly/oilpalmrivers](https://bit.ly/oilpalmrivers)
+An interactive view of the oil palm map along rivers produced from this study can be accessed at:<br>
+-[Leaflet map](#)<br>
+-Deprecated: [https://bit.ly/oilpalmrivers](https://bit.ly/oilpalmrivers)
 
 
 
