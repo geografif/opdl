@@ -28,7 +28,7 @@ This is a repository for oil palm semantic segmentation from Sentinel-1 SAR and/
 ![](figures/riparian.gif "oil palm plantation on riparian zone")
 #### Interactive map for year 2021
 An interactive view of the oil palm map along rivers produced from this study can be accessed at:<br>
--[Leaflet map](#)<br>
+-[Leaflet map](https://geografif/github.io/opdl/map/)<br>
 -[https://bit.ly/oilpalmrivers](https://bit.ly/oilpalmrivers) (depcrecated)
 
 
