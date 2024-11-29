@@ -1,6 +1,6 @@
 ## Oil Palm Deep Learning (OPDL)
 
-This is a repository for oil palm semantic segmentation from Sentinel-1 SAR and/or Sentinel-2 MS using fully convolutional neural network U-Net. The project was part of my MSc [thesis](http://essay.utwente.nl/97994/) supervised by [Iris van Duren](https://research.utwente.nl/en/persons/ic-van-duren) and [Raian V. Maretto](https://research.utwente.nl/en/persons/raian-vargas-maretto). The oil palm label was obtained from high-resolution oil palm map by [Descals et al. 2021](https://zenodo.org/record/4473715).<br>
+This is a repository for oil palm semantic segmentation from Sentinel-1 SAR and/or Sentinel-2 MS using fully convolutional neural network U-Net. The project was part of my MSc [thesis](http://essay.utwente.nl/97994/) supervised by [Iris van Duren](https://research.utwente.nl/en/persons/ic-van-duren) and [Raian V. Maretto](https://research.utwente.nl/en/persons/raian-vargas-maretto). The model was trained on University of Twente's [CRIB](https://platform.crib.utwente.nl/)The oil palm label was obtained from high-resolution oil palm map by [Descals et al. 2021](https://zenodo.org/record/4473715).<br>
 
 ![](figures/prediction.png "Comparison of SAR image, predicted oil palm, and reference oil palm map")
 ![](figures/pred2.png "Comparison of reference oil palm map and predicted oil palm")
