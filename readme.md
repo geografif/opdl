@@ -16,6 +16,7 @@ This is a repository for oil palm semantic segmentation from Sentinel-1 SAR and/
 ##### Split to train/val/test
 #### Deep learning model training
 ##### Single input
+![](figures/single_unet.png "unet")
 ##### Stack input
 ##### Dual input (with spatial attention)
 #### Inference
