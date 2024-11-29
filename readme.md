@@ -1,9 +1,9 @@
 ## Oil Palm Deep Learning (OPDL)
 
-This is a repository for oil palm semantic segmentation from Sentinel-1 SAR and/or Sentinel-2 MS using fully convolutional neural network U-Net.<br>
-The oil palm label was obtained from high-resolution oil palm map by Descals et al. 2021.<br>
+This is a repository for oil palm semantic segmentation from Sentinel-1 SAR and/or Sentinel-2 MS using fully convolutional neural network U-Net. The project was part of my MSc [thesis](http://essay.utwente.nl/97994/). The oil palm label was obtained from high-resolution oil palm map by Descals et al. 2021.<br>
 
-![](prediction.png "Comparison of SAR image, predicted oil palm, and reference oil palm map")
+![](figures/prediction.png "Comparison of SAR image, predicted oil palm, and reference oil palm map")
+![](figures/pred2.png "Comparison of reference oil palm map and predicted oil palm")
 
 ### Background
 
@@ -21,8 +21,11 @@ The oil palm label was obtained from high-resolution oil palm map by Descals et 
 #### Inference
 
 ### Results
-#### Accuracy metric
-#### GIF
-#### Interactive leaflet map year 2021
+#### Model performances
+#### Map accuracy
+#### Interactive map for year 2021
+An interactive view of the oil palm map along rivers produced from this study can be accessed at 
+Deprecated: [https://bit.ly/oilpalmrivers](https://bit.ly/oilpalmrivers)
+
 
 
