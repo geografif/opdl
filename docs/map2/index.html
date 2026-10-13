@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>MapLibre Satellite Basemap + Oracle GeoJSON + Toggle</title>
+    <title>MapLibre Satellite + Transparent OCI Polygons</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
     
     <!-- MapLibre GL JS CSS & JS -->
@@ -46,7 +46,7 @@
     </div>
 
     <script>
-        // 1. Initialize MapLibre with a Satellite Imagery Basemap (Esri World Imagery)
+        // 1. Initialize MapLibre with Esri World Imagery Satellite Basemap
         const map = new maplibregl.Map({
             container: 'map',
             style: {
@@ -71,26 +71,26 @@
                     }
                 ]
             },
-            center: [15.473, 49.817], // Centered over Czechia (adjust if your data is elsewhere)
+            center: [15.473, 49.817], // Centered over Czechia
             zoom: 7
         });
 
-        // 2. Load the GeoJSON from Oracle Cloud when map loads
+        // 2. Load the GeoJSON using your OCI Pre-Authenticated Request URL
         map.on('load', () => {
             map.addSource('oracle-geojson-source', {
                 type: 'geojson',
-                data: 'https://objectstorage.eu-stockholm-1.oraclecloud.com/n/axugepzdcbl1/b/geodata/o/geo.geojson'
+                data: 'https://objectstorage.eu-stockholm-1.oraclecloud.com/p/F5Cx84yXlkkvgFCEiY6iEjGB0FsWm5+IZl5AJap+Q27P25UtFy7gyO3jBStKW7HT/n/axugepzdcbl1/b/geodata/o/geo.geojson'
             });
 
-            // 3. Add the Polygon Fill Layer
+            // 3. Add the Transparent Polygon Layer with Outlines
             map.addLayer({
                 id: 'oracle-polygons-layer',
                 type: 'fill',
                 source: 'oracle-geojson-source',
                 paint: {
-                    'fill-color': '#ff7800', // Bright orange so it stands out against satellite imagery
-                    'fill-opacity': 0.5,
-                    'fill-outline-color': '#ffffff' // White outline for contrast
+                    'fill-color': '#ff7800', // Color of the fill (won't be seen if opacity is 0)
+                    'fill-opacity': 0.0,     // 0.0 means completely transparent inside
+                    'fill-outline-color': '#ffffff' // Crisp white border lines to see the shapes
                 }
             });
 
