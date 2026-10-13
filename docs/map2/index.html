@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Modern MapLibre + Oracle Cloud GeoJSON</title>
+    <title>MapLibre Satellite Basemap + Oracle GeoJSON + Toggle</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
     
     <!-- MapLibre GL JS CSS & JS -->
@@ -12,38 +12,93 @@
     <style>
         body { margin: 0; padding: 0; }
         #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+
+        /* Styling for the layer toggle control box */
+        #layer-control {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            padding: 10px 14px;
+            font-family: sans-serif;
+            font-size: 14px;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+        #layer-control label {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
     </style>
 </head>
 <body>
+
     <div id="map"></div>
 
+    <!-- UI Control to show/hide the layer -->
+    <div id="layer-control">
+        <label>
+            <input type="checkbox" id="toggle-layer" checked> Show Polygons
+        </label>
+    </div>
+
     <script>
-        // 1. Initialize the MapLibre map with a clean open-source vector basemap
+        // 1. Initialize MapLibre with a Satellite Imagery Basemap (Esri World Imagery)
         const map = new maplibregl.Map({
             container: 'map',
-            style: 'https://demotiles.maplibre.org/style.json', // Vector basemap
-            center: [15.473, 49.817], // Centered around Czechia (CZ)
+            style: {
+                version: 8,
+                sources: {
+                    'satellite-basemap': {
+                        type: 'raster',
+                        tiles: [
+                            'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+                        ],
+                        tileSize: 256,
+                        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                    }
+                },
+                layers: [
+                    {
+                        id: 'satellite-layer',
+                        type: 'raster',
+                        source: 'satellite-basemap',
+                        minzoom: 0,
+                        maxzoom: 22
+                    }
+                ]
+            },
+            center: [15.473, 49.817], // Centered over Czechia (adjust if your data is elsewhere)
             zoom: 7
         });
 
-        // 2. Add your Oracle Cloud GeoJSON dataset on map load
+        // 2. Load the GeoJSON from Oracle Cloud when map loads
         map.on('load', () => {
             map.addSource('oracle-geojson-source', {
                 type: 'geojson',
-                // Pointing directly to your Oracle Cloud Object Storage GeoJSON file
-                data: 'https://objectstorage.eu-stockholm-1.oraclecloud.com/n/axugepzdcbl1/b/geodata/o/geo.geojson' 
+                data: 'https://objectstorage.eu-stockholm-1.oraclecloud.com/n/axugepzdcbl1/b/geodata/o/geo.geojson'
             });
 
-            // 3. Render the polygon layer using hardware-accelerated WebGL
+            // 3. Add the Polygon Fill Layer
             map.addLayer({
                 id: 'oracle-polygons-layer',
                 type: 'fill',
                 source: 'oracle-geojson-source',
                 paint: {
-                    'fill-color': '#2563eb', // Modern blue tone
-                    'fill-opacity': 0.4,
-                    'fill-outline-color': '#1e40af'
+                    'fill-color': '#ff7800', // Bright orange so it stands out against satellite imagery
+                    'fill-opacity': 0.5,
+                    'fill-outline-color': '#ffffff' // White outline for contrast
                 }
+            });
+
+            // 4. Hook up the Show/Hide Checkbox Control
+            const checkbox = document.getElementById('toggle-layer');
+            checkbox.addEventListener('change', (e) => {
+                const visibility = e.target.checked ? 'visible' : 'none';
+                map.setLayoutProperty('oracle-polygons-layer', 'visibility', visibility);
             });
         });
     </script>
