@@ -2,18 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>MapLibre Satellite + Transparent OCI Polygons</title>
+    <title>MapLibre Satellite + Secure Proxy Polygons</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
     
     <!-- MapLibre GL JS CSS & JS -->
     <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
     <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+    <!-- Turf.js for auto-centering and bounds calculation -->
+    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
 
     <style>
         body { margin: 0; padding: 0; }
         #map { position: absolute; top: 0; bottom: 0; width: 100%; }
 
-        /* Styling for the layer toggle control box */
+        /* UI Control styling for the layer toggle box */
         #layer-control {
             position: absolute;
             top: 10px;
@@ -38,7 +40,7 @@
 
     <div id="map"></div>
 
-    <!-- UI Control to show/hide the layer -->
+    <!-- UI Control to show/hide the polygon layer -->
     <div id="layer-control">
         <label>
             <input type="checkbox" id="toggle-layer" checked> Show Polygons
@@ -71,34 +73,50 @@
                     }
                 ]
             },
-            center: [15.473, 49.817], // Centered over Czechia
-            zoom: 7
+            center: [0, 0],
+            zoom: 2
         });
 
-        // 2. Load the GeoJSON using your OCI Pre-Authenticated Request URL
-        map.on('load', () => {
-            map.addSource('oracle-geojson-source', {
-                type: 'geojson',
-                data: 'https://objectstorage.eu-stockholm-1.oraclecloud.com/p/F5Cx84yXlkkvgFCEiY6iEjGB0FsWm5+IZl5AJap+Q27P25UtFy7gyO3jBStKW7HT/n/axugepzdcbl1/b/geodata/o/geo.geojson'
-            });
+        // 2. Fetch GeoJSON securely through your Cloudflare Worker proxy (hiding your direct bucket URL)
+        const secureProxyUrl = 'https://spring-truth-8d27.m-afif-fau.workers.dev';
 
-            // 3. Add the Transparent Polygon Layer with Outlines
-            map.addLayer({
-                id: 'oracle-polygons-layer',
-                type: 'fill',
-                source: 'oracle-geojson-source',
-                paint: {
-                    'fill-color': '#ff7800', // Color of the fill (won't be seen if opacity is 0)
-                    'fill-opacity': 0.0,     // 0.0 means completely transparent inside
-                    'fill-outline-color': '#ffffff' // Crisp white border lines to see the shapes
-                }
-            });
+        map.on('load', async () => {
+            try {
+                const response = await fetch(secureProxyUrl);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const data = await response.json();
 
-            // 4. Hook up the Show/Hide Checkbox Control
+                // Add the GeoJSON source to the map
+                map.addSource('secure-geojson-source', {
+                    type: 'geojson',
+                    data: data
+                });
+
+                // Add the transparent polygon fill layer with visible outlines
+                map.addLayer({
+                    id: 'polygons-layer',
+                    type: 'fill',
+                    source: 'secure-geojson-source',
+                    paint: {
+                        'fill-color': '#ff7800',        // Base fill color (hidden by 0 opacity)
+                        'fill-opacity': 0.0,            // Completely transparent inside to reveal satellite imagery
+                        'fill-outline-color': '#ffff00' // High-visibility bright yellow border lines
+                    }
+                });
+
+                // Automatically calculate bounding box and fly map directly to your data
+                const bbox = turf.bbox(data);
+                map.fitBounds(bbox, { padding: 50, maxZoom: 15 });
+
+            } catch (error) {
+                console.error("Error loading geospatial data via proxy:", error);
+            }
+
+            // 3. Hook up the Show/Hide Checkbox Control
             const checkbox = document.getElementById('toggle-layer');
             checkbox.addEventListener('change', (e) => {
                 const visibility = e.target.checked ? 'visible' : 'none';
-                map.setLayoutProperty('oracle-polygons-layer', 'visibility', visibility);
+                map.setLayoutProperty('polygons-layer', 'visibility', visibility);
             });
         });
     </script>
